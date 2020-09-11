@@ -10,5 +10,5 @@
 	* UC Browser - install [Tampermonkey](https://tampermonkey.net/?ext=dhdg&browser=ucweb).
 
 2. Install:
-	* Install the script directly from GitHub by clicking **[Install](https://raw.githubusercontent.com/scavet64/TikTokVolumeSlider/master/TikTokVolumeSlider.js)**
+	* Install the script directly from GitHub by clicking **[Install](https://raw.githubusercontent.com/scavet64/TikTokVolumeSlider/master/TikTokVolumeSlider.user.js)**
     * Install the script manually

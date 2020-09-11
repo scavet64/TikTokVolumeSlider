@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name        TikTok Volume Slider
-// @version     2.1
+// @version     2.2
 // @description A userscript that adds a simple volume slider to the desktop tiktok site to prevent your ears from being destroyed. The volume is stored in local storage so it is remembered between sessions.
 // @namespace   https://github.com/scavet64
 // @match       https://www.tiktok.com/*
 // @grant       none
 // @author      Vincent Scavetta
-// @updateURL   https://raw.githubusercontent.com/scavet64/TikTokVolumeSlider/master/TikTokVolumeSlider.js
-// @downloadURL https://raw.githubusercontent.com/scavet64/TikTokVolumeSlider/master/TikTokVolumeSlider.js
+// @updateURL   https://raw.githubusercontent.com/scavet64/TikTokVolumeSlider/master/TikTokVolumeSlider.user.js
+// @downloadURL https://raw.githubusercontent.com/scavet64/TikTokVolumeSlider/master/TikTokVolumeSlider.user.js
 // ==/UserScript==
 
 const mainSliderContainer = '.menu-right';
