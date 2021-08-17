@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        TikTok Volume Slider
-// @version     3.1
+// @version     3.2
 // @description A userscript that adds a simple volume slider to the desktop tiktok site to prevent your ears from being destroyed. The volume is stored in local storage so it is remembered between sessions. Also adds video controls to skip stuff
 // @namespace   https://github.com/scavet64
 // @match       https://www.tiktok.com/*
@@ -19,6 +19,26 @@ const modalSliderID = 'modalSliderId';
 const localStorageKey = 'customVolume';
 
 let volumeLevel = getVolume();
+
+/**
+ * Alter the HTMLMediaElement.prototype's setter so that it reduces the volume that tiktok is forcing on us.
+ * As of 8/16/21, tiktok seems to be forcing a volume of 80% on some kind of consistent loop. This will
+ * at least ensure that we can reduce the overall volume to something more reasonable based on the volume slider.
+ * Since its being set to 80%, that will be our new 100% for now until it can be looked into more.
+ */
+const { prototype } = HTMLMediaElement;
+const { set: setter, get: getter } = Object.getOwnPropertyDescriptor(prototype, 'volume');
+Object.defineProperty(prototype, 'volume', {
+  get() {
+    return getter.call(this);
+  },
+  set(arg) {
+    let sliderVolume = getVolume();
+    let newVolume = arg * sliderVolume;
+    console.info(`${arg} transformed to ${newVolume} using slider: ${sliderVolume}`);
+    setter.call(this, newVolume);
+  }
+});
 
 function checkAndCreateModalSlider() {
     // Grab the container that the modal slider will live in.
@@ -66,7 +86,6 @@ function setVideoVolume(value) {
     for (var i = 0; i < videoHtmlCollection.length; i++) {
         video = videoHtmlCollection.item(i);
         if (video) {
-            video.volume = value;
             video.style.cssText += "z-index: 100"; 
             video.setAttribute("controls","controls")   
         }
@@ -87,5 +106,5 @@ function getVolume() {
         checkAndCreateModalSlider();
         checkAndCreateMainSlider();
         setVideoVolume(volumeLevel);
-    }, 100);
+    }, 500);
 })();
