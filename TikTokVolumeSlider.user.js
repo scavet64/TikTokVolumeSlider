@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        TikTok Volume Slider
-// @version     3.2
+// @version     3.2.1
 // @description A userscript that adds a simple volume slider to the desktop tiktok site to prevent your ears from being destroyed. The volume is stored in local storage so it is remembered between sessions. Also adds video controls to skip stuff
 // @namespace   https://github.com/scavet64
 // @match       https://www.tiktok.com/*
@@ -87,7 +87,9 @@ function setVideoVolume(value) {
         video = videoHtmlCollection.item(i);
         if (video) {
             video.style.cssText += "z-index: 100"; 
-            video.setAttribute("controls","controls")   
+            video.setAttribute("controls","controls");
+            video.volume = value;
+            video.muted = false;
         }
     }
 }
@@ -105,6 +107,5 @@ function getVolume() {
     window.setInterval(function () {
         checkAndCreateModalSlider();
         checkAndCreateMainSlider();
-        setVideoVolume(volumeLevel);
     }, 500);
 })();
